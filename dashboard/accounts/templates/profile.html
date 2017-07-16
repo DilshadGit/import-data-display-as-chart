@@ -1,0 +1,44 @@
+{% extends 'layout.html' %}
+
+{% block title %}User Profile{% endblock title %}
+
+{% block content %}
+
+<div class="row">
+	<div class="col-sm-12">
+		<div class="table-responsive">
+			
+			<table class="table table-striped">
+				
+				<caption class="info"><h3>{{user.upper}} Profile</h3></caption>
+				<a href="{% url 'accounts:edit_profile' %}" title="">
+					<button type="submit" class="btn btn-primary pull-right">Eidt</button>
+				</a>
+				<thead>
+					<tr>
+						<th>First Name</th>
+						<th>Last Name</th>
+						<th>Email Address</th>
+						<th>User ID</th>
+						<th>Area</th>
+						<th>Tarrif</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>{{user.first_name}}</td>					
+						<td>{{user.last_name}}</td>										
+						<td>{{user.email}}</td>	
+						{% for x in mydata %}				
+							<td>{{x.user_id}}</td>
+							<td>{{x.area}}</td>
+							<td>{{x.tarrif}}</td>
+						{% endfor %}
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+	
+{% endblock content %}

@@ -1,0 +1,32 @@
+
+{% load staticfiles %}
+
+{% include 'header.html' %}
+{% include 'navbar.html' %}
+<script>
+    $(document).ready(function(){
+      {% block jquery %}{% endblock %}
+    })
+</script>
+
+<div class="container">
+
+
+	{% block content %}
+		<div class="row" url-endpoint="{% url 'consumption:api-data' %}">
+		<!-- <div class="row" > -->
+			<h1>Welcome to Gas Energy</h1>
+			<div class="col-sm-6">
+				<canvas id="myChart" width="400" height="400"></canvas>
+			</div>
+			<div class="col-sm-6">
+				<canvas id="myChart1" width="400" height="400"></canvas>
+			</div>
+			
+		</div>
+		<br>
+	{% endblock content %}
+
+</div>
+
+{% include 'footer.html' %}

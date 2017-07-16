@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+{% load bootstrap_tags %}
+{% block title %}Edit Profile{% endblock title %}
+
+{% block content %}
+
+<div class="row">
+	<div class="col-sm-12">
+		
+			<div class="col-sm-8 col-sm-offset-2">
+			
+				<form class="form-signin" action="" method="POST">{% csrf_token %}
+			        <h3 class="form-signin-heading">Edit Profile</h3>
+					
+					{{edit_form|as_bootstrap}}
+					<br>
+					<button type="submit" class="btn btn-primary pull-right">Update</button>
+					<br>
+				</form>
+				<br>
+
+			</div>
+	</div>
+</div>
+
+{% endblock content %}

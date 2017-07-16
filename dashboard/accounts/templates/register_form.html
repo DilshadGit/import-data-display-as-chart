@@ -1,0 +1,21 @@
+{% extends 'layout.html' %}
+{% load bootstrap_tags %}
+{% block title %}Registeration Form{% endblock title %}
+
+{% block content %}
+
+<div class="row">
+	<div class="col-sm-6 col-sm-offset-3">
+		
+		<form class="form-signin" action="" method="POST">{% csrf_token %}
+	        <h3 class="form-signin-heading">Registeration Form</h3>
+			
+			{{register_form|as_bootstrap}}
+			<button type="submit" class="btn btn-primary pull-right">Register</button>
+			<br>
+		</form>
+		<br><br>
+			
+	</div>
+</div>
+{% endblock content %}

@@ -1,0 +1,44 @@
+{% extends 'layout.html' %}
+
+{# load mathfilters #}
+
+{% block content %}
+
+<div class="row">
+	<div class="col-sm-12">
+		<div class="table-responsive">
+			
+			<table class="table table-striped">
+				
+				<caption class="info"><h3>Consumption Table</h3></caption>
+				<a href="{# url 'accounts:edit_profile' #}" title="">
+					<button type="submit" class="btn btn-primary pull-right">Eidt</button>
+				</a>
+				<thead>
+					<tr>
+						<th>User ID</th>
+						<th>Created date and time</th>
+						<th>Consumption</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for con_obj in consumptions %}
+						<tr>
+							<td>{{con_obj.user_id}}</td>	
+							<td>{{con_obj.create_date_time}}</td>					
+							<td>{{con_obj.consumption}}</td>								
+						</tr>
+					{% endfor %}
+						<tr>
+							<th></th>
+							<th>Summary</th>
+							<td><b>{{total}}</b></td>
+						</tr>	
+				</tbody>
+			</table>
+			<br>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

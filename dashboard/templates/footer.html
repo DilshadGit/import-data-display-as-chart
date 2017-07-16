@@ -1,0 +1,131 @@
+{% load staticfiles %}
+
+
+<footer class="footer">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4"></div>
+			<div class="col-sm-4">
+				<b>Gas Energy</b>
+			</div>
+			<div class="col-sm-4"></div>
+		</div>
+	</div>
+
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+	window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')
+</script>
+<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="{% static 'bootstrap/js/ie10-viewport-bug-workaround.js' %}"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+<!-- http://www.chartjs.org/docs/latest/getting-started/usage.html -->
+<script>
+{% block jquery %}
+	
+	var endpoint = '/api/chart/data/' 
+	var defaultData = []
+	var labels = [];
+	$.ajax({
+		method: 'GET',
+		url: endpoint, 
+		success: function(data){
+			labels = data.labels
+			defaultData = data.default
+			setChart()
+		},
+		error: function(error_data){
+			console.log('error')
+			console.log(error_data)
+		}
+	})
+	function setChart(){
+		var ctx = document.getElementById("myChart");
+		var myChart = new Chart(ctx, {
+		    type: 'polarArea',
+		    // type: 'bar',
+		    data: {
+		        labels: labels,
+		        datasets: [{
+		            label: '# Useres'{{qs_count}},
+		            data: defaultData,
+		            backgroundColor: [
+		                'rgba(255, 99, 132, 0.2)',
+		                'rgba(54, 162, 235, 0.2)',
+		                'rgba(255, 206, 86, 0.2)',
+		                'rgba(75, 192, 192, 0.2)',
+		                'rgba(153, 102, 255, 0.2)',
+		                'rgba(255, 159, 64, 0.2)'
+		            ],
+		            borderColor: [
+		                'rgba(255,99,132,1)',
+		                'rgba(54, 162, 235, 1)',
+		                'rgba(255, 206, 86, 1)',
+		                'rgba(75, 192, 192, 1)',
+		                'rgba(153, 102, 255, 1)',
+		                'rgba(255, 159, 64, 1)'
+		            ],
+		            borderWidth: 1
+		        }]
+		    },
+		    options: {
+		        scales: {
+		            yAxes: [{
+		                ticks: {
+		                    beginAtZero:true
+		                }
+		            }]
+		        }
+		    }
+		});
+		var ctx1 = document.getElementById("myChart1");
+		var myChart1 = new Chart(ctx1, {
+		    type: 'bar',
+		    data: {
+		        labels: labels,
+		        datasets: [{
+		            label: '# Consumption',
+		            data: defaultData,
+		            backgroundColor: [
+		                'rgba(255, 99, 132, 0.2)',
+		                'rgba(54, 162, 235, 0.2)',
+		                'rgba(255, 206, 86, 0.2)',
+		                'rgba(75, 192, 192, 0.2)',
+		                'rgba(153, 102, 255, 0.2)',
+		                'rgba(255, 159, 64, 0.2)'
+		            ],
+		            borderColor: [
+		                'rgba(255,99,132,1)',
+		                'rgba(54, 162, 235, 1)',
+		                'rgba(255, 206, 86, 1)',
+		                'rgba(75, 192, 192, 1)',
+		                'rgba(153, 102, 255, 1)',
+		                'rgba(255, 159, 64, 1)'
+		            ],
+		            borderWidth: 1
+		        }]
+		    },
+		    options: {
+		        scales: {
+		            yAxes: [{
+		                ticks: {
+		                    beginAtZero:true
+		                }
+		            }]
+		        }
+		    }
+		});
+	}
+	
+{% endblock jquery %}
+</script>
+
+
+</body>
+	
+</html>
