@@ -6,30 +6,35 @@
 
 {% block content %}
 
-        <h2 class="text-center mt-3">User Login</h2>
-        <div class="row ml-3">
-            <div class="col-lg-4 cols-md-6 col-sm-3 g-3">
-                <form class="mr-8">
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Email address</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-                  </div>
-                  <div class="mb-3">
-                      <label for="exampleInputPassword5" class="form-label">Password</label>
-                      <input type="password" class="form-control" id="exampleInputPassword1">
-                  </div>
-                  <div class="mb-3 form-check">
-                      <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                      <label class="form-check-label" for="exampleCheck1">Save password</label>
-                  </div>
-                  <button type="submit" class="btn btn-primary">Login</button>
+<h2 class="text-center mt-3">User Login</h2>
+<div class="row ml-3">
+    <div class="col-lg-4 cols-md-6 col-sm-3 g-3">
+        <form method="POST" class="mr-8" action="{{  art.get_absolute_url }}" enctype='multipart/form-data' multiple>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-block">Login</button>
+        </form>
+    </div>
+</div>
+<br>
 
-                  <a href="{% url 'accounts:forgetpass' %}">
-                      <button type="submit" class="btn btn-primary mr-5">Forget Password</button>
-                  </a>
-                </form>
-            </div>
-        </div>
-        <br>
 {% endblock  %}
+
+{#            <div class="mb-3">#}
+{#                <label for="exampleInputEmail1" class="form-label">Email address</label>#}
+{#                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">#}
+{#                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>#}
+{#          </div>#}
+{#          <div class="mb-3">#}
+{#              <label for="exampleInputPassword5" class="form-label">Password</label>#}
+{#              <input type="password" class="form-control" id="exampleInputPassword1">#}
+{#          </div>#}
+{#          <div class="mb-3 form-check">#}
+{#              <input type="checkbox" class="form-check-input" id="exampleCheck1">#}
+{#              <label class="form-check-label" for="exampleCheck1">Save password</label>#}
+{#          </div>#}
+{#          <button type="submit" class="btn btn-primary">Login</button>#}
+{##}
+{#          <a href="{% url 'accounts:forgetpass' %}">#}
+{#              <button type="submit" class="btn btn-primary mr-5">Forget Password</button>#}
+{#          </a>#}

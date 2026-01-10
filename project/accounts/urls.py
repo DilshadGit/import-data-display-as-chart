@@ -1,4 +1,5 @@
 from django.urls import path
+from django.contrib.auth import authenticate, login
 
 from .views import (
     user_login_view,
