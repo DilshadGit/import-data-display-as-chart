@@ -2,6 +2,10 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout, get_user
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 
+from django.shortcuts import render, get_object_or_404, redirect
+
+from .models import UserProfile
+
 # Create your views here.
 def user_login_view(request):
     templates = 'login.html'
@@ -22,6 +26,16 @@ def user_login_view(request):
 def user_logout_view(request):
     templates = 'logout.html'
     context = {}
+    return render(request, templates, context)
+
+def user_profile_view(request):
+    templates = 'user_profile.html'
+    user_instance = get_object_or_404(UserProfile, user=request.user)
+
+    context = {
+        'username': user_instance.user,
+        'profile': user_instance.description,
+    }
     return render(request, templates, context)
 
 

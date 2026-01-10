@@ -1,5 +1,14 @@
 {%  load static %}
+{% load static %}
+{% load django_bootstrap5 %}
+{% block title %}User Profile{% endblock title %}
 
 {% block content %}
+<div class="row ml-3">
+    <div class="col-lg-6 cols-md-6 col-sm-3 g-3">
+        <p>{{ user_instance.username }}</p>
+        <p> {{ user_instance.description }}</p>
 
+    </div>
+</div>
 {%  endblock  %}
