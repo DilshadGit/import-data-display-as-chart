@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load django_bootstrap5 %}
+
+{% block title %}Home{% endblock title %}
+
+<script>
+    $(document).ready(function(){
+      {% block jquery %}{% endblock %}
+    })
+</script>
+
+
+{% block content %}
+    <div class="row" href="{# url 'consumption:api-data' #}">
+    <!-- <div class="row" > -->
+        <h1 class="left">Welcome to Gas Energy</h1>
+        <div class="col-sm-6">
+            <canvas id="myChart" width="400" height="400"></canvas>
+        </div>
+        <div class="col-sm-6">
+            <canvas id="myChart1" width="400" height="400"></canvas>
+        </div>
+    </div>
+    <br>
+{% endblock content %}
+
+
+
+
