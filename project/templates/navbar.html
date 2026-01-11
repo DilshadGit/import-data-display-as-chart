@@ -21,14 +21,20 @@
 
         <div class="text-end">
             {% if request.user.is_authenticated %}
-                <button type="button" class="btn btn-outline-light me-2">Logout</button>
-                <button type="button" class="btn btn-warning">Profile</button>
+                <a href="{% url 'accounts:logout' %}">
+                    <button type="button" class="btn btn-outline-light me-2">Logout</button>
+                </a>
+                <a href="{% url 'accounts:profile' %}">
+                    <button type="button" class="btn btn-warning">Profile</button>
+                </a>
             {%  else %}
                 <a href="{% url 'accounts:login' %}">
                     <button type="button" class="btn btn-outline-light me-2">Login</button>
                 </a>
-                <button class="btn btn-warning"><a href="">Sign-up</a></button>
-            {%  endif %}
+                <a class="pl-3" href="{% url 'accounts:register' %}">
+                    <button type="submit" class="btn btn-outline-light pl-4">Sin-up</button>
+                </a>
+            {% endif %}
         </div>
     </nav>
 </div>

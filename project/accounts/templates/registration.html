@@ -2,17 +2,17 @@
 
 {% load static %}
 {% load django_bootstrap5 %}
-{% block title %}Login{% endblock title %}
+{% block title %}Sin-up{% endblock title %}
 
 {% block content %}
 
-<h2 class="text-center mt-3">User Login</h2>
+<h2 class="text-center mt-3">Sign-up</h2>
 <div class="row ml-3">
-    <div class="col-lg-4 cols-md-6 col-sm-3 g-3">
+    <div class="col-lg-8 cols-md-6 col-sm-3 g-3">
         <form method="POST" class="mr-8" action="" enctype='multipart/form-data' multiple>
             {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit" class="btn btn-primary">Login</button>
+            <button type="submit" class="btn btn-primary">Sign-up</button>
         </form>
 
     </div>

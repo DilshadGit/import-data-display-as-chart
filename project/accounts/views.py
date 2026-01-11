@@ -1,6 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth import authenticate, login, logout, get_user
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+
+from django.http import HttpResponseRedirect
+
 
 from django.shortcuts import render, get_object_or_404, redirect
 
@@ -15,17 +18,19 @@ def user_login_view(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            return redirect('/')
-        else:
-            form = AuthenticationForm(request)
-    context = {
-        'form': form,
-    }
-    return render(request, templates, context)
+            return HttpResponseRedirect('/')
+    else:
+        form = AuthenticationForm(request)
+        context = {
+            'form': form,
+        }
+        return render(request, templates, context)
 
 def user_logout_view(request):
     templates = 'logout.html'
-    context = {}
+    context = {
+
+    }
     return render(request, templates, context)
 
 def user_profile_view(request):
@@ -41,10 +46,22 @@ def user_profile_view(request):
 
 def user_forgetpass_view(request):
     templates = 'forgetpass.html'
+
     context = {}
     return render(request, templates, context)
 
 def user_register_view(request):
-    templates = 'rwgistrations.html'
-    context = {}
-    return render(request, templates, context)
+    templates = 'registration.html'
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            # form.save()
+            return redirect('/')
+    else:
+        form = UserCreationForm()
+        context = {
+            'form': form,
+        }
+        return render(request, templates, context)
