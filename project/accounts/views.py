@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth import authenticate, login, logout, get_user
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm, UserChangeForm
 
 from django.http import HttpResponseRedirect
 
@@ -36,10 +36,16 @@ def user_logout_view(request):
 def user_profile_view(request):
     templates = 'user_profile.html'
     user_instance = get_object_or_404(UserProfile, user=request.user)
-
     context = {
         'username': user_instance.user,
         'profile': user_instance.description,
+        'email': user_instance.email,
+        'city': user_instance.city,
+        'country': user_instance.country,
+        'phone': user_instance.phone,
+        'weblink': user_instance.weblink,
+        'created_at': user_instance.created_at,
+        'updated_at': user_instance.updated_at,
     }
     return render(request, templates, context)
 
@@ -61,6 +67,21 @@ def user_register_view(request):
             return redirect('/')
     else:
         form = RegistrationForm()
+        context = {
+            'form': form,
+        }
+        return render(request, templates, context)
+
+
+def user_update_profile_view(request):
+    templates = 'update_profile.html'
+    if request.method == 'POST':
+        form = UserChangeForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('/user/account/profile')
+    else:
+        form = UserChangeForm(request.POST, instance=request.user)
         context = {
             'form': form,
         }
