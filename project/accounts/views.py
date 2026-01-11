@@ -8,11 +8,11 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 
 from .models import UserProfile
+from .forms import RegistrationForm
 
 # Create your views here.
 def user_login_view(request):
     templates = 'login.html'
-    form = AuthenticationForm()
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
@@ -53,14 +53,14 @@ def user_forgetpass_view(request):
 def user_register_view(request):
     templates = 'registration.html'
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = RegistrationForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)
             # form.save()
             return redirect('/')
     else:
-        form = UserCreationForm()
+        form = RegistrationForm()
         context = {
             'form': form,
         }
