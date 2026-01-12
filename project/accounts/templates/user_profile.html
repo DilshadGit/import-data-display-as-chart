@@ -15,8 +15,21 @@
         <p><b>Email</b>: {{ user.email }}</p>
         <P><b>City</b>:{{ user.city }}</P>
     </div>
-    <a href="{% url 'accounts:update_profile' %}" class="nav pb-3">
-        <button type="button" class="btn btn-primary">Update Profile</button>
-    </a>
+
+    <ul class="list-inline">
+        <li class="list-inline-item">
+            <a href="{% url 'accounts:update_profile' %}" class="nav pb-3">
+                <button type="button" class="btn btn-primary">Update Profile</button>
+            </a>
+        </li>
+        <li class="list-inline-item">
+            <a href="{% url 'accounts:change_pass' %}" class="nav pb-3">
+                <button type="button" class="btn btn-primary">Change Password</button>
+            </a>
+        </li>
+    </ul>
+
+
 </div>
 {%  endblock  %}
+change_password

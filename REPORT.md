@@ -61,4 +61,8 @@ def user_login_view(request):
 
 # Create UpdateProfile from UserProfile, first import UserChangeForm in the forms from auth.forms in django while we 
 # create UpdateProfileFrom and inherited from UserChangeForm thoes fields not want to display like password 
-# we can use exclude('passsword') or using Class Meta: model = user display the fields = ('first_name', etc ..)
+# we can use exclude('password') or using Class Meta: model = user display the fields = ('first_name', etc ..)
+
+# We rest password without touching django admin or change the password.
+# To create change password user must be logged in and link the change password top profile when user change the 
+# password it has to be loggedin after change the password using update_session_auth_hash

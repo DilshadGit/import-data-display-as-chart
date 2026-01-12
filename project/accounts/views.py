@@ -1,6 +1,15 @@
 from django.shortcuts import render, redirect, HttpResponse
-from django.contrib.auth import authenticate, login, logout, get_user
-from django.contrib.auth.forms import AuthenticationForm, UserChangeForm
+from django.contrib.auth import (
+    authenticate,
+    login,
+    logout,
+    update_session_auth_hash,
+)
+from django.contrib.auth.forms import (
+    AuthenticationForm,
+    UserChangeForm,
+    PasswordChangeForm,
+)
 from django.contrib.auth.models import User
 
 from django.http import HttpResponseRedirect
@@ -9,7 +18,10 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 
 from .models import UserProfile
-from .forms import RegistrationForm, UpdateProfileFrom
+from .forms import (
+    RegistrationForm,
+    UpdateProfileFrom,
+)
 
 # Create your views here.
 def user_login_view(request):
@@ -67,6 +79,24 @@ def user_update_profile_view(request):
             return redirect('/user/account/profile')
     else:
         form = UpdateProfileFrom(instance=request.user)
+        context = {
+            'form': form,
+        }
+        return render(request, templates, context)
+
+def user_change_password_view(request):
+    templates = 'change_password.html'
+    if request.method == 'POST':
+        form = PasswordChangeForm(data=request.POST, user=request.user)
+
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(request, form.user)
+            return redirect('/user/account/profile')
+        else:
+            return redirect('/user/account/change/password')
+    else:
+        form = PasswordChangeForm(user=request.user)
         context = {
             'form': form,
         }
