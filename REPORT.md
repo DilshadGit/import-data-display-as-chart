@@ -59,3 +59,6 @@ def user_login_view(request):
 # We update UserCreateForm and changed to create own RegistrationForm inherited  UserCreationForm adding email
 # include first_name, last_name with username and two passwords ad default in django however we can changed if we want.
 
+# Create UpdateProfile from UserProfile, first import UserChangeForm in the forms from auth.forms in django while we 
+# create UpdateProfileFrom and inherited from UserChangeForm thoes fields not want to display like password 
+# we can use exclude('passsword') or using Class Meta: model = user display the fields = ('first_name', etc ..)
