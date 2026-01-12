@@ -7,13 +7,16 @@
 
 {% block content %}
 <h2 class="text-left mt-3">Profile</h2>
-<div class="row ml-3">
-    <div class="col-lg-8 cols-md-6 col-sm-3 g-3">
-       <form method="POST" action="" class="form-control mb-5">
-           {% csrf_token %}
-           {{ form.as_p }}
-           <button type="submit" class="btn btn-outline-primary right">Update</button>
-       </form>
+
+<div class="form-group">
+    <div class="row ml-3">
+        <div class="col-lg-8 cols-md-6 col-sm-3 g-3">
+           <form method="POST" action="" class="form-control mb-5">
+               {% csrf_token %}
+               {{ form.as_p }}
+               <button type="submit" class="btn btn-outline-primary right">Update</button>
+           </form>
+        </div>
     </div>
 </div>
 {%  endblock  %}

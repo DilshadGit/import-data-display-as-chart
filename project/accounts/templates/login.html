@@ -6,17 +6,25 @@
 
 {% block content %}
 
-<h2 class="text-center mt-3">User Login</h2>
-<div class="row ml-3">
-    <div class="col-lg-4 cols-md-6 col-sm-3 g-3">
-        <form method="POST" class="mr-8" action="" enctype='multipart/form-data' multiple>
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit" class="btn btn-primary">Login</button>
-        </form>
+<div class="login-container">
+    <div class="row ml-3">
+        <div class="col-lg-4 cols-md-6 col-sm-3 g-3">
+            <h2 class="mt-3">User Login</h2>
+            <div class="form-group">
+                <form method="POST" class="form-control mr-8 pt-2" action="" enctype='multipart/form-data' multiple>
+                    {% csrf_token %}
+                    {{ form.as_p }}
 
+                    <button type="submit" class="btn btn-primary">Login</button>
+
+                    <a href="#" class="ForgetPwd" value="Login">Forget Password?</a>
+
+                </form>
+
+            </div>
+
+        </div>
     </div>
 </div>
-<br>
 
 {% endblock  %}

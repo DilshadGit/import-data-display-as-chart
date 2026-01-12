@@ -9,18 +9,14 @@
 <h2 class="text-left mt-3">Profile</h2>
 <div class="row ml-3">
     <div class="col-lg-8 cols-md-6 col-sm-3 g-3 mb-3">
-        <p>{{ username }}</p>
-        <p> {{ description }}</p>
-        <p> {{ email }}</p>
-        <p> {{ city }}</p>
-        <p> {{ country }}</p>
-        <p> {{ phone }}</p>
-        <p> {{ weblink }}</p>
-        <p> {{ create_at }}</p>
-        <p> {{ update_at }}</p>
+        <p><b>Username</b>: {{ user.username }}</p>
+        <p><b>First name</b>: {{ user.first_name }}</p>
+        <p><b>Last name</b>: {{ user.last_name }}</p>
+        <p><b>Email</b>: {{ user.email }}</p>
+        <P><b>City</b>:{{ user.city }}</P>
     </div>
     <a href="{% url 'accounts:update_profile' %}" class="nav pb-3">
-        <button type="button" class="btn btn-outline-primary">Update Profile</button>
+        <button type="button" class="btn btn-primary">Update Profile</button>
     </a>
 </div>
 {%  endblock  %}
