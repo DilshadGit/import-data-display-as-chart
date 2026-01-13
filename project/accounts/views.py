@@ -1,23 +1,28 @@
+from django.contrib import messages
+from django.conf import settings
 from django.shortcuts import render, redirect, HttpResponse
+
+from django.contrib.auth.models import User
 from django.contrib.auth import (
     authenticate,
     login,
     logout,
     update_session_auth_hash,
 )
+from django.contrib.auth.decorators import login_required
+
 from django.contrib.auth.forms import (
     AuthenticationForm,
     UserChangeForm,
     PasswordChangeForm,
 )
-from django.contrib.auth.models import User
 
-from django.http import HttpResponseRedirect
+from django.core.mail import EmailMessage
+
+from django.utils import timezone
+from django.urls import reverse
 
 
-from django.shortcuts import render, get_object_or_404, redirect
-
-from .models import UserProfile
 from .forms import (
     RegistrationForm,
     UpdateProfileFrom,
@@ -31,7 +36,7 @@ def user_login_view(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            return HttpResponseRedirect('/')
+            return redirect('/')
     else:
         form = AuthenticationForm(request)
         context = {
@@ -53,7 +58,6 @@ def user_register_view(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            # form.save()
             return redirect('/')
     else:
         form = RegistrationForm()
@@ -62,7 +66,7 @@ def user_register_view(request):
         }
         return render(request, templates, context)
 
-
+@login_required
 def user_profile_view(request):
     templates = 'user_profile.html'
     context = {
@@ -70,6 +74,7 @@ def user_profile_view(request):
     }
     return render(request, templates, context)
 
+@login_required
 def user_update_profile_view(request):
     templates = 'update_profile.html'
     if request.method == 'POST':
@@ -84,6 +89,7 @@ def user_update_profile_view(request):
         }
         return render(request, templates, context)
 
+@login_required
 def user_change_password_view(request):
     templates = 'change_password.html'
     if request.method == 'POST':
@@ -102,9 +108,25 @@ def user_change_password_view(request):
         }
         return render(request, templates, context)
 
+from django.contrib.auth.forms import PasswordResetForm
 
-def user_forgetpass_view(request):
-    templates = 'forgetpass.html'
+@login_required
+def user_reset_pass_view(request):
+    templates = 'reset_password.html'
+    if request.method == 'POST':
+        reset_pass_form = PasswordResetForm()
+        if reset_pass_form.is_valid():
+            email = reset_pass_form.cleaned_data['email']
+            email_user = User.objects.get(email=email)
+            return redirect('/user/account/reset_password/'+email_user.username)
+    else:
+        # return redirect('/user/account/reset_password/')
+        reset_pass_form = PasswordResetForm()
+        context = {
+            'reset_pass_form': reset_pass_form,
+        }
+        return render(request, templates, context)
 
-    context = {}
-    return render(request, templates, context)
+@login_required
+def user_reset_password_done(request):
+    templates = 'reset_password_done.html'

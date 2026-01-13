@@ -2,6 +2,8 @@
 
 {% load static %}
 {% load django_bootstrap5 %}
+{% load crispy_forms_tags %}
+
 {% block title %}Login{% endblock title %}
 
 {% block content %}
@@ -13,11 +15,11 @@
             <div class="form-group">
                 <form method="POST" class="form-control mr-8 pt-2" action="" enctype='multipart/form-data' multiple>
                     {% csrf_token %}
-                    {{ form.as_p }}
+                    {{ form|crispy }}
 
                     <button type="submit" class="btn btn-primary">Login</button>
 
-                    <a href="#" class="ForgetPwd" value="Login">Forget Password?</a>
+                    <a href="{% url 'accounts:reset_password' %}" class="btn btn-primary bottom-right" value="Reset">Reset Password?</a>
 
                 </form>
 

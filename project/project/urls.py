@@ -19,10 +19,12 @@ from django.contrib import admin
 from django.conf.urls.static import static
 from django.urls import include, path
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('user/', include('accounts.urls', namespace='accounts')),
     path('', include('consumption.urls', namespace='consumption')),
+
 ]
 
 if settings.DEBUG:

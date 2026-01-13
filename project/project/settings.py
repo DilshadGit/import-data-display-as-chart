@@ -26,21 +26,31 @@ SECRET_KEY = 'django-insecure-o8p%$flna48c+jo6u@1kw#jwjmu!or&6lg$!5)-m%qm+8fml@(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
 
-INSTALLED_APPS = [
+DEFAULT_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_bootstrap5',
-    'accounts',
 ]
+
+THIRD_PARTY_APPS = [
+    'django_bootstrap5',
+    'crispy_forms',
+    'crispy_bootstrap5',
+]
+
+LOCAL_APPS = [
+    'accounts.apps.AccountsConfig',
+]
+
+INSTALLED_APPS = DEFAULT_APPS + LOCAL_APPS + THIRD_PARTY_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -120,20 +130,34 @@ LOGIN_REDIRECT_URL = '/'
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
-MEDIA_URL = '/media/'
+MEDIA_URL = 'media/'
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
-    #'/var/www/static/',
-]
-
-
+STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 # static_cdn stand for static content delivery network
 STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static_root')
-
-MEDIA_ROOT = '/media/'
-
 MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'media_root')
+
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/login'
+
+# To send email
+EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = '1025'
+
+# Email page email backend
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST = 'smtpd.gmail.com'
+EMAIL_USER = 'dilshad.a73@gmail.com'
+EMAIL_HOST_PASSWORD = '@RaffI1#9TillY7$3'
+EMAIL_PORT = '587'
+EMAIL_USE_TLS = True
+# EMAIL_USE_SSL = True
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field

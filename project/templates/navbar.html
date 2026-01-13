@@ -2,7 +2,7 @@
 {% load django_bootstrap5 %}
 
 <div class="container-fluid">
-    <nav class="navbar navbar-default mb-4">
+    <nav class="navbar navbar-default navbar-expand-lg mb-4">
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
             <a class="navbar-brand" href="{% url 'consumption:home' %}">Gas Energy</a>
         </div>
@@ -20,12 +20,15 @@
         </form>
 
         <div class="text-end">
-            {% if request.user.is_authenticated %}
+            {% if user.is_authenticated %}
+
                 <a href="{% url 'accounts:logout' %}">
                     <button type="button" class="btn btn-outline-light me-2">Logout</button>
                 </a>
                 <a href="{% url 'accounts:profile' %}">
-                    <button type="button" class="btn btn-warning">Profile</button>
+                    <button type="button" class="btn btn-outline-light">
+                        {{ user.username.upper }}
+                    </button>
                 </a>
             {%  else %}
                 <a href="{% url 'accounts:login' %}">

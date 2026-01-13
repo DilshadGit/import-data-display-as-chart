@@ -1,6 +1,9 @@
 # To make it easy to see layout created account for the user for login, logout, register, forget password
 # create profile, update profile delete profile and delete the username.
 
+# WARNING: This is a development server. Do not use it in a production setting. Use a production WSGI or ASGI server 
+# instead. For more information on production servers see: https://docs.djangoproject.com/en/5.2/howto/deployment/
+
 # Accounts
 
 # Login view https://docs.djangoproject.com/en/5.0/_modules/django/contrib/auth/views/
@@ -66,3 +69,64 @@ def user_login_view(request):
 # We rest password without touching django admin or change the password.
 # To create change password user must be logged in and link the change password top profile when user change the 
 # password it has to be loggedin after change the password using update_session_auth_hash
+
+# Reset password or forget password next:
+# Info and explain this line
+    path('', include('django.contrib.auth.urls', namespace='auth')),
+
+# Reference : https://docs.djangoproject.com/en/5.0/topics/auth/default/
+from django.contrib.auth import views
+from django.urls import path
+
+urlpatterns = [
+    path("login/", views.LoginView.as_view(), name="login"),
+    path("logout/", views.LogoutView.as_view(), name="logout"),
+    path(
+        "password_change/", views.PasswordChangeView.as_view(), name="password_change"
+    ),
+    path(
+        "password_change/done/",
+        views.PasswordChangeDoneView.as_view(),
+        name="password_change_done",
+    ),
+    path("password_reset/", views.PasswordResetView.as_view(), name="password_reset"),
+    path(
+        "password_reset/done/",
+        views.PasswordResetDoneView.as_view(),
+        name="password_reset_done",
+    ),
+    path(
+        "reset/<uidb64>/<token>/",
+        views.PasswordResetConfirmView.as_view(),
+        name="password_reset_confirm",
+    ),
+    path(
+        "reset/done/",
+        views.PasswordResetCompleteView.as_view(),
+        name="password_reset_complete",
+    ),
+]
+
+We can add this line in main urls.py to reduce coding for every forms related to authentication process like
+login, password_reset, registration, change_password, 
+# Refernces to use for Password_reset:
+    https://github.com/django/django/blob/main/django/contrib/auth/urls.py
+    https://github.com/django/django/blob/main/django/contrib/auth/views.py
+    https://github.com/django/django/blob/main/django/contrib/auth/forms.py
+
+Working or rest_password but all built function for Password_reset, Password_reset_done, Password_reset_confirm,
+Password_reset_confirm_done has been changed still redirected me to admin page need extra works.
+# The New function are PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView  
+
+# To send email:
+Looks like you are trying to send a mail (send_mail()) and your mail settings in your settings.py are not correct.
+
+You should check the docs for sending emails.
+For debugging purposes you could setup a local smtpserver with this command:
+
+python -m smtpd -n -c DebuggingServer localhost:1025
+
+# and adjust your mail settings accordingly:
+
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 1025
