@@ -152,7 +152,7 @@ EMAIL_PORT = '1025'
 # Email page email backend
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_HOST = 'smtpd.gmail.com'
-EMAIL_USER = 'dilshad.a73@gmail.com'
+EMAIL_USER = 'dilshad@email.com'
 EMAIL_HOST_PASSWORD = '@*******@'
 EMAIL_PORT = '587'
 EMAIL_USE_TLS = True
