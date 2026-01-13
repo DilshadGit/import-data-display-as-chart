@@ -17,7 +17,7 @@
       <sourceFolder url="file://$MODULE_DIR$/dashboard" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/dvenv" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.13 (import-data-display-as-chart)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.12 (import-data-display-as-chart)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="PyDocumentationSettings">
